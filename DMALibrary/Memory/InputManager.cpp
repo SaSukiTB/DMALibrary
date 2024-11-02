@@ -36,12 +36,10 @@ bool c_keys::InitKeyboard()
 				if (user_session_state > 0x7FFFFFFFFFFF)
 					break;
 			}
-			if (Winver >= 22631 && Ubr >= 3810)
-				gafAsyncKeyStateExport = user_session_state + 0x36A8;
-			else
-				gafAsyncKeyStateExport = user_session_state + 0x3690;
+			gafAsyncKeyStateExport = (Winver >= 22631 && Ubr >= 3810) ? user_session_state + 0x36A8 : user_session_state + 0x3690;
 			if (gafAsyncKeyStateExport > 0x7FFFFFFFFFFF)
 				break;
+			
 		}
 		if (gafAsyncKeyStateExport > 0x7FFFFFFFFFFF)
 			return true;
